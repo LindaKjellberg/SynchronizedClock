@@ -21,15 +21,24 @@ public class MainActivity extends AppCompatActivity {
         //communicate with text fields
         //serverTime
         final TextView serverTime = (TextView) findViewById(R.id.serverTime);
-        serverTime.setText("Display serverTime");
+        serverTime.setText("Display serverTime = NPT");
 
         //timeDifference
         final TextView timeDifference = (TextView) findViewById(R.id.timeDifference);
-        timeDifference.setText("Display timeDifference");
+        timeDifference.setText("Display timeDifference = serverTime - systemTime");
 
         //systemTime
         final TextView systemTime = (TextView) findViewById(R.id.systemTime);
         systemTime.setText("Display systemTime");
 
+        //currentTime
+        final TextView currentTime = (TextView) findViewById(R.id.currentTime);
+        currentTime.setText("Display currentTime = systemTime - timeDifference");
+        //Update current time
+        /*
+        String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+        textView is the TextView view that should display it
+        stextView.setText(currentDateTimeString);
+         */
     }
 }
