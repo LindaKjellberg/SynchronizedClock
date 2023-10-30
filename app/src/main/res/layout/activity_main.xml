@@ -11,31 +11,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="189dp"
-        tools:layout_editor_absoluteY="296dp" />
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="294dp" />
 
     <TextView
         android:id="@+id/timeDifference"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="189dp"
-        tools:layout_editor_absoluteY="354dp" />
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="356dp" />
 
     <TextView
         android:id="@+id/systemTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="187dp"
-        tools:layout_editor_absoluteY="414dp" />
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="416dp" />
 
     <TextView
         android:id="@+id/currentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="210dp" />
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="234dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
