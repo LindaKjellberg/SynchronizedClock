@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         final TextView serverTime = (TextView) findViewById(R.id.serverTime);
         serverTime.setText("Display serverTime");
 
+        //timeDifference
+        final TextView timeDifference = (TextView) findViewById(R.id.timeDifference);
+        timeDifference.setText("Display timeDifference");
+
         //systemTime
         final TextView systemTime = (TextView) findViewById(R.id.systemTime);
         systemTime.setText("Display systemTime");
