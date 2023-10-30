@@ -1,12 +1,13 @@
 package com.example.synchronizedclock;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.synchronizedclock.client.NTPClient;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
-//import com.example.synchronizedclock.client.ServerTime;
+import java.text.DateFormat;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
         //currentTime
         final TextView currentTime = (TextView) findViewById(R.id.currentTime);
-        currentTime.setText("Display currentTime = systemTime - timeDifference");
         //Update current time
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        //currentTime.setText("Display currentTime = systemTime - timeDifference");
+        currentTime.setText("current tajm: " + currentDateTimeString);
         /*
         String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
         textView is the TextView view that should display it
