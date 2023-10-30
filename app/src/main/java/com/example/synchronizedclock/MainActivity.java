@@ -19,8 +19,13 @@ public class MainActivity extends AppCompatActivity {
         //@Composable
         //onCreate
         //communicate with text fields
+        //serverTime
         final TextView serverTime = (TextView) findViewById(R.id.serverTime);
         serverTime.setText("Display serverTime");
+
+        //systemTime
+        final TextView systemTime = (TextView) findViewById(R.id.systemTime);
+        systemTime.setText("Display systemTime");
 
     }
 }
