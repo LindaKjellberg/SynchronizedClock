@@ -6,7 +6,6 @@ import org.apache.commons.net.ntp.TimeStamp;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 //NTP Client class to get server time from NTP server
 public class NTPClient {
@@ -53,6 +52,11 @@ public class NTPClient {
         // Get current system time as a TimeStamp object
         this.systemNTPTime = TimeStamp.getCurrentTime();
 
+        //Get timeDifference (Offset) by
+        public Long timeDifference() {
+            return this.offset;
+        }
+
         // Get remote NTP time by adding the offset to current system time
         long currentTime = System.currentTimeMillis();
         this.remoteNTPTime = TimeStamp.getNtpTime(currentTime + offset);
@@ -69,5 +73,14 @@ public class NTPClient {
 
         return this.remoteNTPTime;
     }
+
+  /*  //Method to get the offset
+
+    public long getOffset() {
+        return this.offset;
+    }
+
+   */
+
     //serverTime.updateServerTime(remoteNTPTime.toDateString())
 }
