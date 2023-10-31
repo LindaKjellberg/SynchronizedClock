@@ -2,6 +2,7 @@ package com.example.synchronizedclock;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.synchronizedclock.client.NTPClient;
+//import com.example.synchronizedclock.textView.serverTime;
 
 import android.os.Bundle;
 import android.os.StrictMode;
