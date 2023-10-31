@@ -69,4 +69,5 @@ public class NTPClient {
 
         return this.remoteNTPTime;
     }
+    //serverTime.updateServerTime(remoteNTPTime.toDateString())
 }
