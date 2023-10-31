@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        //Retrieves system- and remote NTPTime using ntpClient methods
+        //Retrieves system- and remote NTPTime using ntpClient methods from NTPClient class
         TimeStamp systemNTPTime = ntpClient.getSystemNTPTime();
         TimeStamp remoteNTPTime = ntpClient.getRemoteNTPTime();
 
