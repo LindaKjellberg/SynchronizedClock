@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 
 //NTP Client to get server time from NTP server
 public class NTPClient {
-    //
+
     private static final String SERVER_NAME = "0.se.pool.ntp.org";
     private static final int TIMEOUT = 10000;
 
