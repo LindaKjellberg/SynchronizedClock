@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.synchronizedclock.client.NTPClient;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.StrictMode;
+import android.util.Log;
 import android.widget.TextView;
 
 import org.apache.commons.net.ntp.TimeStamp;
@@ -18,7 +21,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     private NTPClient ntpClient;
-    private Timer timer;
+    private Handler handler;
 
     @Override
     //onCreate method called when activity is first created
@@ -28,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         //Set  content view of activity layout defined in "activity_main.xml"
         setContentView(R.layout.activity_main);
 
+        //Allows application to perform network operations on main thread
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        //Applies StrictMode policy to current thread, allows network related operations
+        StrictMode.setThreadPolicy(policy);
+
+        //Initialize handler
+        handler = new Handler();
+
         //Initialize NTPClient
         try {
             ntpClient = new NTPClient();
@@ -35,25 +46,20 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        //Timer that runs fetchNTPTime() every 10 seconds
-        timer = new Timer();
-
-        // This function updates the NTP time and the UI
-
-        timer.scheduleAtFixedRate(new TimerTask() {
+         Runnable runTask = new Runnable() {
             @Override
             public void run() {
+                //If airplane mode is ON show system time, else show network time
                 fetchNTPTime(ntpClient);
+                handler.postDelayed(this, 10000);
             }
-        }, 0, 10 * 1000); //Delay of 0 milliseconds, repeat every 10 seconds
+        };
+
+        handler.post(runTask);
 
 
-        /*
-        //Allows application to perform network operations on main thread
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        //Applies StrictMode policy to current thread, allows network related operations
-        StrictMode.setThreadPolicy(policy);
 
+/*
         //NTPClient reference type and ntpClient variable of NTPClient. Try to create new NTPClient object, if it fails throws runtime exception
         NTPClient ntpClient;
         try {
@@ -73,15 +79,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Update your UI with the new NTP time
-        // ...
-
         // For example, you can update TextViews with new time values
-        runOnUiThread(new Runnable() {
+      /*  runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 // Update your UI components here
             }
         });
+
+       */
+
 
         //Retrieves system- and remote NTPTime using ntpClient methods from NTPClient class
         TimeStamp systemNTPTime = ntpClient.getSystemNTPTime();
