@@ -60,4 +60,4 @@ The `UIHandler` class is responsible for updating the user interface (UI) of the
 You can call the methods of the `UIHandler` class to update the UI elements in your Android app based on the current network connectivity and time synchronization status.
 
 ## Credits
-This app was created by [Your Name] and is open-source. Contributions and bug reports are welcome.
+This app is open-source. Contributions and bug reports are welcome.
