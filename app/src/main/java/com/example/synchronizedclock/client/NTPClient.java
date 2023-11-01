@@ -52,14 +52,15 @@ public class NTPClient {
         // Get current system time as a TimeStamp object
         this.systemNTPTime = TimeStamp.getCurrentTime();
 
-        //Get timeDifference (Offset) by
-        public Long timeDifference() {
-            return this.offset;
-        }
 
         // Get remote NTP time by adding the offset to current system time
         long currentTime = System.currentTimeMillis();
         this.remoteNTPTime = TimeStamp.getNtpTime(currentTime + offset);
+    }
+
+    //Get timeDifference (Offset) by
+    public Long timeDifference() {
+        return this.offset;
     }
 
     //Method to get system NTP time
