@@ -9,69 +9,54 @@ import com.example.synchronizedclock.client.NTPClient;
 import org.apache.commons.net.ntp.TimeStamp;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class UIHandler {
 
-    //Method to fetch NTPTime using NTPClient object as an argument, if it fails throws runtime exception
+    // Update UI when online:
     public void updateUIUsingNTPTime(NTPClient ntpClient, Activity activity) {
+        // Try to fetch the network time from NTP Server
         try {
             ntpClient.fetchTime();
         } catch (IOException e) {
-            throw new RuntimeException(e); //e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
-
-        //Retrieves system- and remote NTPTime using ntpClient methods from NTPClient class
+        // Stores the fetched system- and remote time in local variables
         TimeStamp systemNTPTime = ntpClient.getSystemNTPTime();
         TimeStamp remoteNTPTime = ntpClient.getRemoteNTPTime();
 
-        //Update UI:
-
-        //serverTime
+        // Update UI element
+        String remoteNTPTimeValue = new SimpleDateFormat("HH:mm:ss").format(remoteNTPTime.getDate());
         final TextView serverTime = (TextView) activity.findViewById(R.id.serverTime);
-        serverTime.setText(remoteNTPTime.toDateString());
+        serverTime.setText(remoteNTPTimeValue);
 
-        //timeDifference
+        // Update UI element
         final TextView timeDifference = (TextView) activity.findViewById(R.id.timeDifference);
-        timeDifference.setText("Display timeDifference = serverTime - systemTime");
+        timeDifference.setText(ntpClient.getOffset() + "ms");
 
-        //systemTime
+        // Update UI element
+        String systemNTPTimeValue = new SimpleDateFormat("HH:mm:ss").format(systemNTPTime.getDate());
         final TextView systemTime = (TextView) activity.findViewById(R.id.systemTime);
-        systemTime.setText(systemNTPTime.toDateString());
-
-        //currentTime
-        final TextView currentTime = (TextView) activity.findViewById(R.id.currentTime);
-        //Update current time
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        currentTime.setText("Current time: " + currentDateTimeString);
-
+        systemTime.setText(systemNTPTimeValue);
     }
 
+    //Update UI when offline:
+
     public void updateUIUsingSystemTime(Activity activity) {
-        //serverTime
+        // Update UI element
         final TextView serverTime = (TextView) activity.findViewById(R.id.serverTime);
-        serverTime.setText("heeej");
+        serverTime.setText("Network unavailable");
 
-        //timeDifference
+        // Update UI element
         final TextView timeDifference = (TextView) activity.findViewById(R.id.timeDifference);
-        timeDifference.setText("nej");
+        timeDifference.setText("0ms");
 
-        //systemTime
-        LocalTime currentSystemTime = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String currentSystemTimeValue = currentSystemTime.format(formatter);
+        // Update UI element
+        String currentSystemTimeValue = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
         final TextView systemTime = (TextView) activity.findViewById(R.id.systemTime);
         systemTime.setText(currentSystemTimeValue);
-
-        //currentTime
-        final TextView currentTime = (TextView) activity.findViewById(R.id.currentTime);
-        //Update current time
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        currentTime.setText("aaaah");
     }
 }
 
