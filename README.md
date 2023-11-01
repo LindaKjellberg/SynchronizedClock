@@ -20,7 +20,7 @@ To use this app, you can download and install it on your Android device. You can
 To build the app from the provided source code, follow these steps:
 
 1. Clone this repository to your local machine.
-`git clone https://github.com/yourusername/synchronized-clock-android.git`
+`git clone git@github.com:LindaKjellberg/SynchronizedClock.git`
 2. Open the project in Android Studio or your preferred Android development environment.
 3. Build and run the app on an Android device or emulator.
 4. Enjoy synchronized timekeeping!
