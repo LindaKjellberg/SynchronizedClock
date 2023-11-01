@@ -10,12 +10,14 @@ import org.apache.commons.net.ntp.TimeStamp;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class UIHandler {
 
     //Method to fetch NTPTime using NTPClient object as an argument, if it fails throws runtime exception
-    public void fetchNTPTime(NTPClient ntpClient, Activity activity) {
+    public void updateUIUsingNTPTime(NTPClient ntpClient, Activity activity) {
         try {
             ntpClient.fetchTime();
         } catch (IOException e) {
@@ -47,6 +49,29 @@ public class UIHandler {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         currentTime.setText("Current time: " + currentDateTimeString);
 
+    }
+
+    public void updateUIUsingSystemTime(Activity activity) {
+        //serverTime
+        final TextView serverTime = (TextView) activity.findViewById(R.id.serverTime);
+        serverTime.setText("heeej");
+
+        //timeDifference
+        final TextView timeDifference = (TextView) activity.findViewById(R.id.timeDifference);
+        timeDifference.setText("nej");
+
+        //systemTime
+        LocalTime currentSystemTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String currentSystemTimeValue = currentSystemTime.format(formatter);
+        final TextView systemTime = (TextView) activity.findViewById(R.id.systemTime);
+        systemTime.setText(currentSystemTimeValue);
+
+        //currentTime
+        final TextView currentTime = (TextView) activity.findViewById(R.id.currentTime);
+        //Update current time
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        currentTime.setText("aaaah");
     }
 }
 

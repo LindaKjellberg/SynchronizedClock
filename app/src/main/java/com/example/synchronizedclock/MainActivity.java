@@ -6,6 +6,9 @@ import com.example.synchronizedclock.client.NTPClient;
 import com.example.synchronizedclock.UI.UIHandler;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -49,12 +52,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //If airplane mode is ON show system time, else show network time
-                uiHandler.fetchNTPTime(ntpClient, activity);
+                if(isNetworkAvailable()) {
+                    uiHandler.updateUIUsingNTPTime(ntpClient, activity);
+                } else {
+                    uiHandler.updateUIUsingSystemTime(activity);
+                }
                 handler.postDelayed(this, 10000);
             }
         };
 
         handler.post(runTask);
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkCapabilities capabilities = manager.getNetworkCapabilities(manager.getActiveNetwork());
+        boolean isAvailable = false;
+
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                isAvailable = true;
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                isAvailable = true;
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                isAvailable = true;
+            }
+        }
+        return isAvailable;
     }
 }
