@@ -14,7 +14,7 @@ import android.os.StrictMode;
 
 import java.io.IOException;
 
-//AppCompatActivity creates activities
+// AppCompatActivity creates activities
 public class MainActivity extends AppCompatActivity {
     private UIHandler uiHandler;
     private NTPClient ntpClient;
